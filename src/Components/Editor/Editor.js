@@ -12,24 +12,38 @@ const htmlCode = `
   <title>JS Bin</title>
 </head>
 <body>
-<h1>Heading level one</h1>
+<h3>Welcome to the Code Editor</h3>
+<img src="https://source.unsplash.com/random/1600x900" />
 <script defer src="#"></script>
 </body>
 </html>`
+
+let cssCode = `
+h3{
+    text-align: center;
+}
+    
+img{
+    margin-left: 10%;
+    width: 500px;
+    height: 300px;
+    border-radius: 30px;
+}`
 
 
 function Editor(){
 
     const [languages, setLanguages] = useState({
         html: htmlCode,
-        css: "",
+        css: cssCode,
         javaScript: ""
     })
 
+    const [currentWindow, setCurrentWindow] = useState('html') //to display currentwindow code language on first load/render
     const [output, setOutput] = useState(""); // to render an output using this state
     const [autoRun, setAutoRun] = useState(false); // to toggle autorun 
     const [isDarkMode, setIsDarkMode] = useState(false); // to toggle mode
-    const [currentWindow, setCurrentWindow] = useState('html') //to display currentwindow code language on first load/render
+    
 
     const languagesTab = Object.keys(languages).map((item, index) => ( 
         //object.keys will return all the keys of the object in an array format. So here we will get [html, css, javaScript]
@@ -49,7 +63,9 @@ function Editor(){
         }       
     }
 
-//This will replace css and JS predefined tags with updated css and JS inside individual editor present in our webpage.
+//This will replace css and JS predefined tags with updated css 
+// and JS inside individual editor present in our webpage.
+
    const bindLanguages = () => {
     let html = languages.html
     const bindCssJs = html.replace(`<link rel="stylesheet" href="#" />`, `<style>${languages.css}</style>`).
@@ -60,22 +76,23 @@ function Editor(){
 
     //To handle editor change
     const handleEditorChange = (e) => {
-      const language = {...languages}// cloning the languages by breaking the reference using spread operator and it is an example of call by value
+        const language = {...languages}
+      // cloning the languages by breaking the reference using spread operator and it is an example of call by value
     // the above can be used as below as well by destructuring 
       //   const  {html, css, javaScript} = languages
     //   console.log(html, css, javaScript)
 
-      language[currentWindow] = e.target.value // the language will target current window language
+       language[currentWindow] = e.target.value // the language will target current window language
         setLanguages(language) // this will overrite an object and this will call the render function and render it
 
         if(autoRun){  //if autoRun is enabled then this will render currentwindow output
-            setOutput(language[currentWindow]) // if html is set as language then it will render html in output
-        }
+            setOutput(language[currentWindow]) // if html is set as language then it will render html in output and same for other languages
+    }
     }
     //To print an outout in iframe onclicking on run button:
     const handleRun = (e) => {
         e.preventDefault()
-        setOutput(bindLanguages) //we are setting an output with binded css and JS to html page
+        setOutput(bindLanguages) //we are setting an output with binded css and JS to html page in an output after clicking on Run button
     }
 
     const handleClick = (e) => {
@@ -88,14 +105,13 @@ function Editor(){
 
     const handleAutoRun = () => {
         setOutput(bindLanguages)
-        setAutoRun(!autoRun) 
-        //we are toggling the auto run button so that it will change its current state on every click
+        setAutoRun(!autoRun) //we are toggling the auto run button so that it will change its current state on every click
     }
 
 
   return (
-    <div className={isDarkMode ? 'darkMode' : ''}>
-        <header>
+    <div>
+        <header className={isDarkMode ? 'darkMode' : ''}>
             <h3>Code Editor</h3>
             <p>With this code editor, you can edit the code and view the result by clicking on Run button.</p>
         </header>
@@ -107,7 +123,7 @@ function Editor(){
               
             <div className='righttabs'>
                 {/* Run button */}
-                    <button className={isDarkMode ? 'buttonDarkMode' : ''} style={{backgroundColor: '#04AA6D'}} onClick={handleRun}>
+                    <button className={isDarkMode ? 'buttonDarkMode' : ''} style={{backgroundColor: '#04A21C'}} onClick={handleRun}>
                         Run<i className="fa-solid fa-play icon"></i>
                     </button>
 
@@ -121,16 +137,13 @@ function Editor(){
                 {/* Dark mode light mode button */}
                 <button 
                         className={isDarkMode ? 'active' : '' || isDarkMode ? 'buttonDarkMode' : ''} 
-                        onClick={handleMode}>{isDarkMode? <i className="fa-sharp fa-solid fa-sun" style={{borderRadious: '50%'}}></i> : <i className="fa-solid fa-moon"></i>}
+                        onClick={handleMode}>{isDarkMode? <i className="fa-sharp fa-solid fa-sun modeIcon" style={{borderRadious: '50%'}}></i> : <i className="fa-solid fa-moon modeIcon"></i>}
                 </button> 
             </div>
         </div>
            
        
-    <div className='main'>
-        
-        
-            
+    <div className='main'>          
         <div className='editorWindows'>
             <textarea 
                     className={isDarkMode ? 'editor darkMode' : 'editor'} 
