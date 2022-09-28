@@ -14,9 +14,8 @@
 header{
     
     text-align: center;
-    /* margin: 10px 0 10px 0; */
     padding: 8px;
-    background-color: #1976D2;
+    background: linear-gradient(to bottom right, #0A81FF, #1E10B5);
     color: white;
 }
 
@@ -86,7 +85,7 @@ button:hover{
 }
 
 .active{
-   background-color: #1976D2;
+   background-color: #74b6f7;
 }
 
 .active:hover{
@@ -146,7 +145,7 @@ button:hover{
 
 .tabs{
     width: auto;
-    background-color: #5398DD;
+    background: linear-gradient(to bottom right, #e0edf5, #9bc5fb);
     align-items: center;
     padding: 10px;
     FONT-WEIGHT: 100;
