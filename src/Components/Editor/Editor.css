@@ -11,14 +11,19 @@
     height: auto;
 } */
 
-header{
-    
+header{ 
     text-align: center;
     padding: 8px;
     background: linear-gradient(to bottom right, #0A81FF, #1E10B5);
     color: white;
 }
 
+.headerDarkMode{ 
+    text-align: center;
+    padding: 8px;
+    background: rgb(39, 39, 39);
+    color: white;
+}
 
 h3{
     font-family: Jazz LET, fantasy;
@@ -180,6 +185,8 @@ button:hover{
     overflow-x: hidden;
     overflow-y: auto;
     white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     box-shadow: 1px 2px 2px 2px grey;
     outline: none;
     padding: 0.6rem;

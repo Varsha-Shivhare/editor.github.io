@@ -1,6 +1,6 @@
-
 import React, {useState} from 'react';
 import './Editor.css';
+import './EditorMedia.css';
 
 const htmlCode = `
 <!DOCTYPE html>
@@ -13,29 +13,29 @@ const htmlCode = `
 </head>
 <body>
 <h3>Welcome to the Code Editor</h3>
-<img src="https://source.unsplash.com/random/1600x900" />
+<p>Write your code!!!</p>
 <script defer src="#"></script>
 </body>
 </html>`
 
-let cssCode = `
-h3{
-    text-align: center;
-}
+// let cssCode = `
+// h3{
+//     text-align: center;
+// }
     
-img{
-    margin-left: 10%;
-    width: 500px;
-    height: 300px;
-    border-radius: 30px;
-}`
+// img{
+//     margin-left: 10%;
+//     width: 500px;
+//     height: 300px;
+//     border-radius: 30px;
+// }`
 
 
 function Editor(){
 
     const [languages, setLanguages] = useState({
         html: htmlCode,
-        css: cssCode,
+        css: "",
         javaScript: ""
     })
 
@@ -68,8 +68,7 @@ function Editor(){
 
    const bindLanguages = () => {
     let html = languages.html
-    const bindCssJs = html.replace(`<link rel="stylesheet" href="#" />`, `<style>${languages.css}</style>`).
-    replace(`<script defer src="#"></script>`, `<script defer>${languages.javaScript}</script>`)
+    const bindCssJs = html.replace(`<link rel="stylesheet" href="#" />`, `<style>${languages.css}</style>`).replace(`<script defer src="#"></script>`, `<script defer>${languages.javaScript}</script>`)
     return bindCssJs;
    }
   
@@ -111,7 +110,7 @@ function Editor(){
 
   return (
     <div>
-        <header className={isDarkMode ? 'darkMode' : ''}>
+        <header className={isDarkMode ? 'headerDarkMode' : ''}>
             <h3>Code Editor</h3>
             <p>With this code editor, you can edit the code and view the result by clicking on Run button.</p>
         </header>
